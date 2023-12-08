@@ -1,0 +1,117 @@
+{% load static %}
+<aside class="main-sidebar sidebar-light-primary elevation-1">
+  <div class="sidebar">
+    <a
+      href="{% url 'dashboard' %}"
+      class="brand-link"
+      style="display: flex; justify-content: center; align-items: center"
+    >
+      <img
+        src="{% static 'img/invertir1.png' %}"
+        alt=""
+        class="img-fluid rounded-circle"
+        style="width: 80px; height: 80px"
+      />
+    </a>
+    <div class="user-panel mt-1 pb-1 mb-1 d-flex">
+      <div class="info" style="text-align: center">
+        <a class="d-block">
+          <i class="fas fa-user-shield"></i>
+          {{ request.user.get_short_name }}
+        </a>
+      </div>
+    </div>
+    <nav class="mt-2">
+      <ul
+        class="nav nav-pills nav-sidebar flex-column"
+        data-widget="treeview"
+        role="menu"
+        data-accordion="false"
+      >
+        {% comment %}
+        <li class="nav-header">Mantenimientos</li>
+        {% endcomment %}
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-tree"></i>
+            <p>
+              Ventas
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview" style="display: none">
+            <li class="nav-item">
+              <a href="{% url 'product_list' %}" class="nav-link">
+                <i class="nav-icon fas fa-cubes"></i>
+                <p>Inventario</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'sale_list' %}" class="nav-link">
+                <i class="nav-icon fas fa-shopping-cart"></i>
+                <p>Factura</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'remitos_list' %}" class="nav-link">
+                <i class="nav-icon fas fa-file-signature"></i>    
+                <p>Remito</p>
+              </a>
+            </li>    
+            <li class="nav-item">
+              <a href="{% url 'remitos_list' %}" class="nav-link">
+                <i class="nav-icon fas fa-dollar-sign"></i>
+
+                <p>Cotizacion</p>
+              </a>
+            </li>        
+           </ul>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'company_update' %}" class="nav-link">
+            <i class="nav-icon fas fa-building"></i>
+            <p>Compañia</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'category_list' %}" class="nav-link">
+            <i class="nav-icon fa fa-folder"></i>
+            <p>Categorías</p>
+          </a>
+        </li>     
+        <li class="nav-item">
+          <a href="{% url 'project_list' %}" class="nav-link">
+            <i class="nav-icon fas fa-building"></i>
+            <p>Proyectos</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'provider_list' %}" class="nav-link">
+            <i class="nav-icon fas fa-users"></i>
+            <p>Proveedores</p>
+          </a>
+        </li>
+        {% comment %} <li class="nav-item">
+          <a href="{% url 'sale_report' %}" class="nav-link">
+            <i class="nav-icon fas fa-chart-bar"></i>
+            <p>Reporte de Ventas</p>
+          </a>
+        </li>   {% endcomment %}
+  
+        <li class="nav-item">
+          <a href="{% url 'user_list' %}" class="nav-link">
+            <i class="nav-icon fas fa-user-friends"></i>
+            <p>Usuarios</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="https://invertirpinamar.com/" class="nav-link">
+            <i class="nav-icon fa fa-globe"></i>
+            <p>web</p>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</aside>
