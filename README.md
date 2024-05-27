@@ -1,76 +1,127 @@
-# Proyecto Invertir Pinamar
 
-[![Python Version](https://img.shields.io/badge/python-3.9.6-brightgreen.svg)](https://www.python.org/downloads/release/python-396/)
-[![Django Version](https://img.shields.io/badge/django-3.2-brightgreen.svg)](https://www.djangoproject.com/)
-[![Build Status](https://travis-ci.org/yourname/projectname.svg?branch=master)](https://travis-ci.org/yourname/projectname)
+# Inventario
 
-Proyecto  Invertir Pinamar es una aplicación web basada en Django para administrar y gestionar el stock ...
+![Inventario Logo](https://path-to-your-logo-image)
 
-## Table of Contents
+Este es un proyecto de backend para gestionar el inventario de una casa de repuestos de gas. El proyecto está desarrollado en Python y utiliza varios componentes para ofrecer una gestión integral del inventario.
 
-- [Instaladores](#instaladores)
-- [Instalación](#instalación)
-- [Uso](#uso)
-- [Contribuir](#contribuir)
-- [Licencia](#licencia)
+## Características
 
-## Instaladores
+- **Gestión de Productos**: CRUD de productos en el inventario.
+- **Gestión de Proveedores**: Consulta y actualización de información de proveedores.
+- **Gestión de Familias de Productos**: Consulta y actualización de familias de productos.
+- **Sistema de Login**: Autenticación de usuarios usando JWT.
 
-#### Compilador
+## Requisitos
 
-- [Python3](https://www.python.org/downloads/release/python-396/ "Python3")
-
-#### IDE
-
-- [Visual Studio Code](https://code.visualstudio.com/ "Visual Studio Code")
-- [Sublime Text](https://www.sublimetext.com/ "Sublime Text")
-- [Pycharm](https://www.jetbrains.com/es-es/pycharm/download/#section=windows "Pycharm")
-
-#### Motor de base de datos
-
-- [Sqlite Studio](https://github.com/pawelsalawa/sqlitestudio/releases "Sqlite Studio")
-- [PostgreSQL](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads "PostgreSQL")
-- [MySQL](https://www.apachefriends.org/es/index.html "MySQL")
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.63.0-green)
+![Uvicorn](https://img.shields.io/badge/Uvicorn-0.13.3-lightgrey)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-1.4.15-red)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-orange)
+![MongoDB](https://img.shields.io/badge/MongoDB-4.4-brightgreen)
+![Docker](https://img.shields.io/badge/Docker-20.10.5-blue)
 
 ## Instalación
 
-#### Clonar repositorio 
+1. Clona el repositorio
 
-#### Crear un entorno virtual para posteriormente instalar las librerias del proyecto
+    ```bash
+    git clone https://github.com/ferc33/inventario.git
+    cd inventario
+    ```
 
-- `python3 -m venv venv` (Linux o Windows)
+2. Crea y activa un entorno virtual
 
-#### Instalar el complemento de [weasyprint](https://weasyprint.org/ "weasyprint")
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # En Windows usa `venv\Scripts\activate`
+    ```
 
-- Si estas usando Windows debe descargar el complemento de [GTK3 installer](https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases "GTK3 installer"). En algunas ocasiones se debe colocar en las variables de entorno como primera para que funcione y se debe reiniciar el computador.
-- Si estas usando Linux debes instalar las [librerias](https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#linux "librerias") correspondientes a la distribución que tengas instalado en tu computador.
+3. Instala las dependencias
 
-#### Activar el entorno virtual de nuestro proyecto
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-- `cd venv\Scripts\activate.bat` (Windows)
-- `source venv/bin/active` (Linux)
+4. Configura la base de datos
 
-#### Instalar todas las librerias del proyecto que se encuentran en la carpeta deploy
+    - Crea una base de datos MySQL o MongoDB.
+    - Configura las variables de entorno para la conexión a la base de datos.
 
-- `pip install -r deploy/requirements.txt`
+5. Ejecuta la aplicación
 
-#### Crear la base de datos con las migraciones y el superuser para iniciar sesión
-
-- `python manage.py makemigrations`
-- `python manage.py migrate`
-- `python manage.py createsuperuser`
-
-#### Insertar información inicial en la base de datos
-
-- `python manage.py shell`
-- `from core.utilities import *`
+    ```bash
+    uvicorn main:app --reload
+    ```
 
 ## Uso
 
-Descripción de como usar el proyecto...
+La API ofrece varios endpoints para gestionar el inventario, proveedores y familias de productos. A continuación, se muestran algunos ejemplos:
 
-## Contribuir
+- **Productos**
+  - `GET /products`: Lista todos los productos.
+  - `POST /products`: Añade un nuevo producto.
+  - `PUT /products/{id}`: Actualiza un producto existente.
+  - `DELETE /products/{id}`: Elimina un producto.
 
-Si quieres contribuir a este proyecto...
+- **Proveedores**
+  - `GET /suppliers`: Lista todos los proveedores.
+  - `POST /suppliers`: Añade un nuevo proveedor.
+  - `PUT /suppliers/{id}`: Actualiza un proveedor existente.
+  - `DELETE /suppliers/{id}`: Elimina un proveedor.
 
+- **Familias de Productos**
+  - `GET /families`: Lista todas las familias de productos.
+  - `POST /families`: Añade una nueva familia de productos.
+  - `PUT /families/{id}`: Actualiza una familia de productos existente.
+  - `DELETE /families/{id}`: Elimina una familia de productos.
+
+## Autenticación
+
+La API utiliza JWT para la autenticación. Para obtener un token, debes enviar una solicitud de autenticación con las credenciales de usuario:
+
+```http
+POST /login
+Content-Type: application/json
+
+{
+  "username": "user",
+  "password": "pass"
+}
+```
+
+Esto devolverá un token JWT que debe incluirse en los encabezados de las solicitudes a los endpoints protegidos:
+
+```http
+Authorization: Bearer <tu_token_jwt>
+```
+
+## Docker
+
+Para ejecutar la aplicación usando Docker, sigue estos pasos:
+
+1. Construye la imagen de Docker
+
+    ```bash
+    docker build -t inventario .
+    ```
+
+2. Ejecuta el contenedor
+
+    ```bash
+    docker run -d -p 8000:8000 --name inventario inventario
+    ```
+
+## Contribuciones
+
+Las contribuciones son bienvenidas. Por favor, abre un issue o envía un pull request.
+
+## Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+
+---
+
+¡Gracias por usar nuestro sistema de inventario! Si tienes alguna pregunta o problema, no dudes en abrir un issue o contactarnos.
 
